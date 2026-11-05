@@ -1,3 +1,16 @@
+**V2 → Path B (web form) — UI/UX and Logic fixes:**
+- Fixed Intro screen visibility toggle.
+- Fixed progress tracking
+
+**V2 → Path B (web form) — UX refinement:**
+- Swapped heading font to Bricolage Grotesque (800) and body to Fira Sans for readability.
+- Consolidated progress UI into the sidebar (removed dot indicators in favour of full background fills).
+- Moved Compile button to sidebar footer for persistent visibility.
+- Added an Intro "Welcome" screen shown before Section 1.
+- Added keyboard navigation via Left/Right Arrow keys.
+- Added padding/spacing to radio/checkbox fieldsets.
+- Clarified Section 15 checklist wording to reflect external uploads.
+
 **V2 → Path B (web form) — initial build:**
 
 - Lecturer confirmed V2 ARS.md acceptable. Development moved to Path B:

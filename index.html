@@ -6,7 +6,8 @@
   <title>ARS.md Compiler</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -22,16 +23,18 @@
   <div class="app-shell">
 
     <aside class="sidebar" aria-label="Section navigation">
-      <p class="sidebar__heading">Sections</p>
+      <p class="sidebar__heading">Sections <span id="sidebar-progress-pct" class="sidebar__heading-pct">0%</span></p>
       <nav class="sidebar__nav" id="sidebar-nav">
         <!-- Filled by JS from sections.js -->
       </nav>
       <div class="sidebar__footer">
-        <p class="sidebar__progress-label">Progress</p>
         <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
           <div class="progress-bar__fill" id="progress-fill"></div>
         </div>
         <p class="sidebar__progress-text" id="progress-text">0 of 0 sections complete</p>
+        <button class="btn btn--accent btn--full" id="btn-compile" type="button" disabled>
+          Compile ARS.md
+        </button>
       </div>
     </aside>
 
@@ -45,12 +48,6 @@
         <button class="btn btn--ghost" id="btn-prev" type="button">← Previous</button>
         <span class="wizard-nav__counter" id="nav-counter">Section 1 of N</span>
         <button class="btn btn--primary" id="btn-next" type="button">Next →</button>
-      </div>
-
-      <div class="actions">
-        <button class="btn btn--accent" id="btn-compile" type="button" disabled>
-          Compile ARS.md
-        </button>
       </div>
 
     </main>

@@ -1,25 +1,23 @@
 // sections.js
-// Defines every ARS.md section as an object: id, number, title, purpose,
-// required flag, and a list of fields. Adding a section is a single object.
 
 const ARS_SECTIONS = [
   {
     id: "overview",
     number: 1,
     title: "Assessment Overview",
-    purpose: "Establishes the identity and context of the assessment.",
+    purpose: "Establishes the identity and context of the assessment. The AI uses this to frame every subsequent judgement.",
     required: true,
     fields: [
-      { id: "moduleName", label: "Module name", type: "text", required: true, placeholder: "e.g. Web Development (Introduction)" },
-      { id: "moduleCode", label: "Module code", type: "text", required: true, placeholder: "e.g. WEDE5020" },
-      { id: "qualification", label: "Qualification", type: "text", required: false },
-      { id: "lecturer", label: "Lecturer", type: "text", required: true },
-      { id: "assessmentName", label: "Assessment name", type: "text", required: true },
-      { id: "assessmentType", label: "Assessment type", type: "select", required: true, options: ["Test","Assignment","PoE","Practical","Examination","Project","Essay","Other"] },
+      { id: "moduleName", label: "Module name", type: "text", required: true, placeholder: "e.g. Web Development (Introduction)", help: "The full name of the module." },
+      { id: "moduleCode", label: "Module code", type: "text", required: true, placeholder: "e.g. WEDE5020", help: "The institutional code for the module." },
+      { id: "qualification", label: "Qualification", type: "text", required: false, help: "The degree or diploma this module belongs to." },
+      { id: "lecturer", label: "Lecturer", type: "text", required: true, help: "Your name." },
+      { id: "assessmentName", label: "Assessment name", type: "text", required: true, placeholder: "e.g. PoE Part 2", help: "The specific name of this assessment." },
+      { id: "assessmentType", label: "Assessment type", type: "select", required: true, options: ["Test","Assignment","PoE","Practical","Examination","Project","Essay","Other"], help: "What kind of assessment is this?" },
       { id: "assessmentMode", label: "Assessment mode", type: "select", required: true, options: ["Practical","Theory","Mixed"], help: "Practical = artefact-based. Theory = written answers. Mixed = both." },
       { id: "semester", label: "Semester / term", type: "text", required: false },
-      { id: "totalMarks", label: "Total marks (full assessment)", type: "number", required: true },
-      { id: "scopedMarks", label: "Marks within AI scope", type: "number", required: true },
+      { id: "totalMarks", label: "Total marks (full assessment)", type: "number", required: true, help: "The total marks for the entire assessment." },
+      { id: "scopedMarks", label: "Marks within AI scope", type: "number", required: true, help: "How many marks is the AI actually marking? (May be less than total if you are only marking one section)." },
       { id: "dueDate", label: "Due date / submission window", type: "text", required: false }
     ]
   },
@@ -31,7 +29,7 @@ const ARS_SECTIONS = [
     required: true,
     fields: [
       { id: "roles", label: "Roles (select all that apply)", type: "checkboxes", required: true, options: ["Second marker","Moderator","Feedback assistant","Quality assurance reviewer","Other"] },
-      { id: "roleDescription", label: "Role description in the lecturer's own words", type: "textarea", required: true, help: "Describe how you want the AI to behave — what it should and shouldn't do." }
+      { id: "roleDescription", label: "Role description in the lecturer's own words", type: "textarea", required: true, help: "Example: 'The AI should act as a second marker, assessing only the CSS sections. It should not assess HTML or JavaScript.'" }
     ]
   },
   {
@@ -85,7 +83,7 @@ const ARS_SECTIONS = [
     purpose: "Pre-marking observations from the lecturer. These must reach the student feedback.",
     required: false,
     fields: [
-      { id: "observations", label: "Observations (paste below)", type: "textarea", required: false, help: "One per line. The AI must incorporate these verbatim." }
+      { id: "observations", label: "Observations (paste below)", type: "textarea", required: false, help: "One per line. The AI must incorporate these verbatim into feedback. E.g. 'Website not pushed to repository.' or 'Referencing entirely absent.'" }
     ]
   },
   {
@@ -105,7 +103,7 @@ const ARS_SECTIONS = [
     purpose: "Predefined mark reductions for common submission problems.",
     required: false,
     fields: [
-      { id: "specialCases", label: "Assignment-specific special cases", type: "textarea", required: false, help: "One per line. Universal and theory-specific cases are already applied automatically." }
+      { id: "specialCases", label: "Assignment-specific special cases", type: "textarea", required: false, help: "One per line. Example: 'Cap External Stylesheet at 5/10 if only one HTML page exists.'" }
     ]
   },
   {
@@ -166,10 +164,17 @@ const ARS_SECTIONS = [
     id: "files",
     number: 15,
     title: "Assessment Files Supplied",
-    purpose: "Checklist so the lecturer knows what to upload alongside ARS.md.",
+    purpose: "Checklist so you know what other documents you need to bring into the AI chat.",
     required: true,
     fields: [
-      { id: "filesChecklist", label: "Files that will be supplied", type: "checkboxes", required: true, options: ["ARS.md (this file)","CHANGELOG.md","Question paper / brief","Full marking rubric","Memorandum","Sample feedback","Student submissions","Lecturer observations","Other"] }
+      { 
+        id: "filesChecklist", 
+        label: "I will upload the following documents to the AI chat alongside this ARS.md", 
+        type: "checkboxes", 
+        required: true, 
+        options: ["Question paper / brief","Full marking rubric","Memorandum","Sample feedback","Student submissions","Lecturer observations","Other"],
+        help: "This tool only generates the ARS.md. Select the other documents you are responsible for providing to the AI."
+      }
     ]
   }
 ];
