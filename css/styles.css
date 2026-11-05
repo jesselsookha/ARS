@@ -439,3 +439,22 @@ footer {
   .app-header__title { font-size: 1.5rem; }
   .app-header__subtitle { display: none; }
 }
+
+/* ------------ 404 -------------- */
+.heading404 {
+  font-family: var(--font-heading); 
+  color: var(--primary); 
+  font-size: 3rem; 
+  margin-bottom: 1rem;
+}
+
+.main404 {
+  padding: 4rem 2rem; 
+  text-align: center; 
+  max-width: 600px; 
+  margin: 0 auto;
+}
+
+.p404 {
+  margin-bottom: 2rem;
+}
