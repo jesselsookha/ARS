@@ -25,7 +25,10 @@ function goToSection(index) {
   document.getElementById("nav-counter").textContent = `Section ${index + 1} of ${ARS_SECTIONS.length}`;
   document.getElementById("btn-prev").disabled = index === 0;
   document.getElementById("btn-next").disabled = index === ARS_SECTIONS.length - 1;
-  document.getElementById("workspace").scrollIntoView({ behavior: "smooth", block: "start" });
+  // Only scroll to top if we are on a small screen where the sidebar isn't sticky
+  if (window.innerWidth <= 900) {
+    document.getElementById("workspace").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function wireNav() {
