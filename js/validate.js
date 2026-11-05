@@ -3,13 +3,12 @@
 function isSectionComplete(section) {
   const data = getSectionData(section.id);
   
-  // If optional, it's only "complete" if they actually filled something in.
-  // But it doesn't block the compile button.
+  // For optional sections, if there's any data, it's considered "complete" for display purposes.
   if (!section.required) {
     return hasAnyValue(data);
   }
 
-  // If required, check all required fields
+  // For required sections, check if all required fields are filled.
   return section.fields
     .filter(f => f.required)
     .every(f => {
@@ -22,4 +21,25 @@ function isSectionComplete(section) {
 
 function allRequiredComplete() {
   return ARS_SECTIONS.filter(s => s.required).every(isSectionComplete);
+}
+
+// NEW: Calculate progress including optional sections
+function calculateProgress() {
+  let totalWeight = 0;
+  let completedWeight = 0;
+
+  ARS_SECTIONS.forEach(section => {
+    // Compulsory sections are always counted.
+    // Optional sections are only counted IF the user has filled something in.
+    if (section.required || hasAnyValue(getSectionData(section.id))) {
+      totalWeight += 1;
+      if (isSectionComplete(section)) {
+        completedWeight += 1;
+      }
+    }
+  });
+
+  // Prevent division by zero
+  if (totalWeight === 0) return 0;
+  return Math.round((completedWeight / totalWeight) * 100);
 }

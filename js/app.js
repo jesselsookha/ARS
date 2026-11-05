@@ -16,17 +16,23 @@ function renderIntroScreen() {
   intro.className = "intro-screen";
   intro.innerHTML = `
     <h2>Welcome to the ARS.md Compiler</h2>
-    <p>This tool helps you build an <strong>Assessment Review Specification (ARS)</strong> to upload to an AI chat. It ensures the AI understands exactly how you want to mark your students.</p>
+    <p>The <strong>Assessment Review Specification (ARS)</strong> is a structured instruction manual for an AI. By filling out this form, you are teaching the AI exactly how to act as your second marker or moderator.</p>
     
-    <p><strong>How to use this tool:</strong></p>
+    <p><strong>What you will produce:</strong><br>
+    Once you complete the compulsory sections and click "Compile", this tool will generate an <code>ARS.md</code> file. You will download this file and upload it into a new AI chat alongside your student submissions, question paper, and rubric.</p>
+
+    <p><strong>The Process:</strong></p>
     <ul>
-      <li>Fill in the sections using the <strong>Next</strong> button or the <strong>Left/Right Arrow keys</strong>.</li>
-      <li>You can jump to any section using the menu on the left.</li>
-      <li>Sections marked with an <strong>amber asterisk (*)</strong> are compulsory.</li>
-      <li><strong>Sidebar Legend:</strong> A <strong>Dusk Blue</strong> dot means the section is compulsory and needs attention. A <strong>Pacific Blue</strong> filled dot means the section is complete. A grey dot means the section is optional.</li>
-      <li>Once all compulsory sections are complete, the <strong>Compile ARS.md</strong> button in the bottom left will become active.</li>
+      <li><strong>Compulsory Sections (Amber Dots):</strong> There are 9 compulsory sections. You must fill these out so the AI understands its role, your rubric, the scope of what it is allowed to mark, and how you want feedback structured.</li>
+      <li><strong>Optional Sections (Tea Green Dots):</strong> These sections (like Lecturer Observations, Overrides, or Sample Feedback) are not strictly required to generate the ARS, but filling them in will make the AI's marking much more accurate to your specific preferences.</li>
+      <li><strong>Completion:</strong> As you fill in fields, the dots in the sidebar will turn blue, and the progress bar will update.</li>
+      <li><strong>Navigation:</strong> Use the buttons below, the left sidebar, or your keyboard's Left/Right Arrow keys to move between sections.</li>
     </ul>
-    <button class="btn btn--primary" onclick="goToSection(0)">Begin →</button>
+    
+    <p><strong>What happens after you compile?</strong><br>
+    You will start a new conversation with an AI tool. You will upload the compiled ARS.md, and then upload your students' work. The AI will read the ARS.md, confirm it understands the instructions, and then begin marking.</p>
+
+    <button class="btn btn--primary" onclick="goToSection(0)">Begin Assessment Overview →</button>
   `;
   wizard.prepend(intro);
 }
@@ -103,14 +109,16 @@ function updateSidebarStates() {
 }
 
 function updateProgressUI() {
-  const required = ARS_SECTIONS.filter(s => s.required);
-  const total = required.length;
-  const done = required.filter(s => isSectionComplete(s)).length;
-  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+  const pct = calculateProgress();
   
   document.getElementById("progress-fill").style.width = pct + "%";
   document.getElementById("progress-bar").setAttribute("aria-valuenow", pct);
-  document.getElementById("progress-text").textContent = `${done} of ${total} required sections complete`;
+  
+  // We can still count required sections for the text label
+  const required = ARS_SECTIONS.filter(s => s.required);
+  const done = required.filter(s => isSectionComplete(s)).length;
+  
+  document.getElementById("progress-text").textContent = `${done} of ${required.length} required sections complete`;
   document.getElementById("sidebar-progress-pct").textContent = `${pct}%`;
   
   document.getElementById("btn-compile").disabled = !allRequiredComplete();

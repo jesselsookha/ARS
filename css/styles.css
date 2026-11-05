@@ -131,7 +131,8 @@ body {
   font-weight: 600;
 }
 
-/* Dots Legend */
+/* ---------- Sidebar Dots Legend ---------- */
+
 .sidebar__item-dot {
   width: 10px;
   height: 10px;
@@ -139,24 +140,25 @@ body {
   background: var(--surface);
   border: 2px solid var(--rule);
   flex-shrink: 0;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
 }
 
-/* Required section dot (empty state) */
+/* Compulsory Section - Empty State (Amber) */
 .sidebar__item.is-required .sidebar__item-dot {
-  border-color: var(--primary);
-  background: var(--surface);
+  border-color: var(--accent);
+  background: transparent;
 }
 
-/* Completed section dot */
+/* Optional Section - Empty State (Tea Green) */
+.sidebar__item:not(.is-required) .sidebar__item-dot {
+  border-color: var(--tint);
+  background: transparent;
+}
+
+/* Completed State (Pacific Blue Filled) */
 .sidebar__item.is-complete .sidebar__item-dot {
   background: var(--interactive);
   border-color: var(--interactive);
-}
-/* Optional section dot */
-.sidebar__item:not(.is-required) .sidebar__item-dot {
-  border-color: var(--rule);
-  background: var(--page-bg);
 }
 
 .sidebar__item-label { flex: 1; }
