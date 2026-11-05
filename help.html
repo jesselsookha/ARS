@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help — ARS.md Compiler</title>
+  <meta name="description" content="Deep dive guidance for each of the 15 sections of the Assessment Review Specification.">
+  <link rel="canonical" href="https://jesselsookha.github.io/ARS/help.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/og-image.svg">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__inner">
+      <h1 class="app-header__title">ARS<span class="app-header__dot">.</span>md</h1>
+      <p class="app-header__subtitle">Assessment Review Specification — compiler</p>
+      <nav class="app-header__nav">
+        <a href="index.html" class="app-header__link">Compiler</a>
+        <a href="help.html" class="app-header__link app-header__link--active">Help</a>
+        <a href="examples/index.html" class="app-header__link">Examples</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar sidebar--help" aria-label="Help navigation">
+      <p class="sidebar__heading">Sections</p>
+      <nav class="sidebar__nav">
+        <a href="#s1" class="sidebar__item">1. Assessment Overview</a>
+        <a href="#s2" class="sidebar__item">2. Purpose of AI Review</a>
+        <a href="#s3" class="sidebar__item">3. Marking Scope</a>
+        <a href="#s4" class="sidebar__item">4. Full Rubric</a>
+        <a href="#s5" class="sidebar__item">5. Submission Evidence</a>
+        <a href="#s6" class="sidebar__item">6. Insufficient Evidence</a>
+        <a href="#s7" class="sidebar__item">7. Lecturer Observations</a>
+        <a href="#s8" class="sidebar__item">8. Marking Philosophy</a>
+        <a href="#s9" class="sidebar__item">9. Special Cases</a>
+        <a href="#s10" class="sidebar__item">10. Output Format</a>
+        <a href="#s11" class="sidebar__item">11. Moderation Notes</a>
+        <a href="#s12" class="sidebar__item">12. Overrides</a>
+        <a href="#s13" class="sidebar__item">13. Feedback Style</a>
+        <a href="#s14" class="sidebar__item">14. Batch Processing</a>
+        <a href="#s15" class="sidebar__item">15. Assessment Files</a>
+      </nav>
+    </aside>
+
+    <main class="workspace help-content">
+      <h1 class="help-title">Help &amp; Deep-Dive Tutorial</h1>
+      <p class="help-intro">This page explains each of the 15 sections of the ARS.md compiler — what the section is for, why the AI needs it, and examples of good and bad input.</p>
+
+      <section id="s1" class="help-section">
+        <h2>1. Assessment Overview</h2>
+        <p><strong>What it is:</strong> The identity and context of the assessment — module, lecturer, marks, mode.</p>
+        <p><strong>Why the AI needs it:</strong> The AI uses this to frame every judgement. A "Theory" assessment with an essay criterion will be marked very differently from a "Practical" assessment with a CSS rubric.</p>
+        <h3>Good example</h3>
+        <pre>Module: WEDE5020 — Web Development (Introduction)
+Mode: Practical
+Total marks: 70 (CSS &amp; Responsive Design section only)</pre>
+        <h3>What to avoid</h3>
+        <pre>Module: [empty]
+Total marks: 100</pre>
+        <p>The AI cannot make informed decisions without knowing what it's marking.</p>
+      </section>
+
+      <!-- Repeat the above block for sections 2–15 -->
+
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <p>ARS.md Compiler — static tool. No data is saved to a server.</p>
+    <p><a href="https://github.com/jesselsookha/ARS" target="_blank" rel="noopener">View Source</a></p>
+  </footer>
+</body>
+</html>

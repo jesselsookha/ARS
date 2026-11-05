@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample ARS Documents — ARS.md Compiler</title>
+  <link rel="canonical" href="https://jesselsookha.github.io/ARS/examples/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../assets/og-image.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .examples-content { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    .examples-title { font-family: var(--font-heading); font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+    .examples-intro { color: var(--ink-soft); margin-bottom: 2rem; }
+    .example-card {
+      display: block; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-md);
+      padding: 1.5rem; margin-bottom: 1rem; text-decoration: none; color: var(--ink);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .example-card:hover { border-color: var(--interactive); transform: translateY(-2px); }
+    .example-card h3 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .example-card p { color: var(--ink-soft); font-size: 0.9rem; }
+    .md-viewer { background: white; padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--rule); }
+    .md-viewer .markdown-body { background: white; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__inner">
+      <h1 class="app-header__title">ARS<span class="app-header__dot">.</span>md</h1>
+      <p class="app-header__subtitle">Assessment Review Specification — compiler</p>
+      <nav class="app-header__nav">
+        <a href="../index.html" class="app-header__link">Compiler</a>
+        <a href="../help.html" class="app-header__link">Help</a>
+        <a href="index.html" class="app-header__link app-header__link--active">Examples</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="examples-content">
+    <div id="list-view">
+      <h1 class="examples-title">Sample ARS Documents</h1>
+      <p class="examples-intro">Two fictional but complete ARS.md files. Use these as reference points for what a well-constructed Assessment Review Specification looks like.</p>
+      
+      <a href="#wed5020" class="example-card" data-file="wed5020-practical.md">
+        <h3>WEDE5020 — Web Development PoE (Practical)</h3>
+        <p>A practical assessment covering HTML, CSS, and responsive design. Demonstrates how to scope the AI to specific rubric sections.</p>
+      </a>
+
+      <a href="#psy101" class="example-card" data-file="psy101-theory.md">
+        <h3>PSY101 — Introduction to Psychology (Theory)</h3>
+        <p>A theory-based essay assessment. Demonstrates how to mark argument quality, referencing, and structure.</p>
+      </a>
+    </div>
+
+    <div id="view-view" style="display:none;">
+      <p><a href="#" id="back-link" style="color: var(--interactive); text-decoration: underline;">← Back to all examples</a></p>
+      <div class="md-viewer">
+        <article class="markdown-body" id="md-content"></article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>ARS.md Compiler — static tool. No data is saved to a server.</p>
+    <p><a href="https://github.com/jesselsookha/ARS" target="_blank" rel="noopener">View Source</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+  <script>
+    const listView = document.getElementById("list-view");
+    const viewView = document.getElementById("view-view");
+    const mdContent = document.getElementById("md-content");
+
+    document.querySelectorAll(".example-card").forEach(card => {
+      card.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const file = card.dataset.file;
+        listView.style.display = "none";
+        viewView.style.display = "block";
+        mdContent.innerHTML = "<p>Loading...</p>";
+        try {
+          const res = await fetch(file);
+          if (!res.ok) throw new Error("Could not load file.");
+          const md = await res.text();
+          mdContent.innerHTML = marked.parse(md);
+          window.scrollTo(0, 0);
+        } catch (err) {
+          mdContent.innerHTML = `<p style="color:#d9534f">Could not load <code>${file}</code>. If you are viewing this locally, please serve the site via a local web server (e.g., VS Code Live Server) — the browser blocks <code>fetch()</code> on <code>file://</code> URLs.</p>`;
+        }
+      });
+    });
+
+    document.getElementById("back-link").addEventListener("click", (e) => {
+      e.preventDefault();
+      viewView.style.display = "none";
+      listView.style.display = "block";
+      mdContent.innerHTML = "";
+    });
+  </script>
+</body>
+</html>

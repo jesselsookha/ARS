@@ -413,21 +413,90 @@ footer {
   margin-top: 2rem;
 }
 
+/* ---------- Stage 5: Header Navigation ---------- */
+.app-header__inner { display: flex; align-items: center; gap: 1.5rem; width: 100%; }
+.app-header__nav { margin-left: auto; display: flex; gap: 0.5rem; }
+.app-header__link {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s, color 0.15s;
+}
+.app-header__link:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.app-header__link--active { background: rgba(255, 255, 255, 0.15); color: #fff; }
+
+/* ---------- Stage 5: Centered Workspace ---------- */
+/* Update .workspace to center on wide screens */
+.workspace {
+  padding: 2.5rem 3rem 4rem;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ---------- Stage 5: Footer ---------- */
+.app-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+  grid-column: 1 / -1;
+  background: var(--surface);
+}
+.app-footer p { margin-bottom: 0.4rem; }
+.app-footer a { color: var(--interactive); text-decoration: underline; }
+
+/* ---------- Stage 5: Print CSS fix ---------- */
 @media print {
-  body * { visibility: hidden; }
-  .output-preview, .output-preview * { visibility: visible; }
+  body * { visibility: hidden !important; }
+  .output-preview,
+  .output-preview * { visibility: visible !important; }
   .output-preview {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    position: static !important;
     background: white !important;
     color: black !important;
-    padding: 0 !important;
-    font-size: 11pt !important;
+    padding: 2cm !important;
+    margin: 0 !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
     box-shadow: none !important;
+    border-radius: 0 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow: visible !important;
+    max-height: none !important;
+    display: block !important;
   }
+  .modal { display: block !important; position: static !important; }
+  .modal__backdrop, .modal__header, .modal__footer, .output-checklist { display: none !important; }
+  .modal__panel { display: block !important; position: static !important; max-height: none !important; overflow: visible !important; box-shadow: none !important; width: auto !important; }
+  .modal__body { overflow: visible !important; display: block !important; padding: 0 !important; }
 }
+
+/* ---------- Help Page ---------- */
+.sidebar--help .sidebar__item {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  display: block;
+}
+.sidebar--help .sidebar__item:hover { background: var(--page-bg); color: var(--primary); }
+.help-content { padding-top: 3rem; }
+.help-title { font-family: var(--font-heading); font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+.help-intro { margin-bottom: 3rem; color: var(--ink-soft); }
+.help-section { margin-bottom: 4rem; scroll-margin-top: 120px; }
+.help-section h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
+.help-section h3 { font-family: var(--font-heading); font-size: 1rem; color: var(--interactive); margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.help-section p { margin-bottom: 0.8rem; line-height: 1.6; }
+.help-section pre { background: #f1f5f9; padding: 1rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8rem; overflow-x: auto; margin-bottom: 1rem; border-left: 3px solid var(--interactive); }
+
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
@@ -440,7 +509,7 @@ footer {
   .app-header__subtitle { display: none; }
 }
 
-/* ------------ 404 -------------- */
+/* ---------- 404 ---------- */
 .heading404 {
   font-family: var(--font-heading); 
   color: var(--primary); 
