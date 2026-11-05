@@ -11,9 +11,16 @@ function init() {
 function goToSection(index) {
   if (index < 0 || index >= ARS_SECTIONS.length) return;
   ARS_STATE.currentSectionIndex = index;
+  
+  // 1. Show the main wizard container
+  const wizardContainer = document.getElementById("wizard");
+  if (wizardContainer) wizardContainer.classList.add("is-active");
+
+  // 2. Hide all inner sections, then show the active one
   document.querySelectorAll(".wizard-section").forEach(el => el.classList.remove("is-active"));
   const target = document.querySelector(`.wizard-section[data-index="${index}"]`);
   if (target) target.classList.add("is-active");
+  
   updateSidebarStates();
   document.getElementById("nav-counter").textContent = `Section ${index + 1} of ${ARS_SECTIONS.length}`;
   document.getElementById("btn-prev").disabled = index === 0;

@@ -34,9 +34,7 @@
   --shadow-md: 0 4px 12px rgba(30, 41, 59, 0.08);
 }
 
-html { 
-    font-size: 16px; 
-}
+html { font-size: 16px; }
 
 body {
   font-family: var(--font-body);
@@ -71,9 +69,7 @@ body {
   line-height: 1;
 }
 
-.app-header__dot { 
-    color: var(--accent); 
-}
+.app-header__dot { color: var(--accent); }
 
 .app-header__subtitle {
   font-size: 0.8rem;
