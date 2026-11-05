@@ -255,6 +255,10 @@ function wireModal() {
     a.click();
     URL.revokeObjectURL(url);
   });
+
+  document.getElementById("btn-print").addEventListener("click", () => {
+    window.print();
+  });
 }
 
 function openOutputModal() {

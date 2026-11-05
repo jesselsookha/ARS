@@ -404,6 +404,31 @@ fieldset.field legend {
   border-color: #fdf2f2;
 }
 
+footer {
+  text-align: center; 
+  padding: 2rem; color: 
+  var(--ink-soft); 
+  font-size: 0.75rem; 
+  border-top: 1px solid var(--rule); 
+  margin-top: 2rem;
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .output-preview, .output-preview * { visibility: visible; }
+  .output-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    font-size: 11pt !important;
+    box-shadow: none !important;
+  }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .app-shell { grid-template-columns: 1fr; }
