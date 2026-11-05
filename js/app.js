@@ -122,4 +122,45 @@ function markSectionProgress(sectionId) {
   updateSidebarStates();
 }
 
-// ... Keep existing wireModal() and openOutputModal() ...
+function wireModal() {
+  document.querySelectorAll("[data-close-modal]").forEach(el => {
+    el.addEventListener("click", () => closeOutputModal());
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeOutputModal(); });
+  document.getElementById("btn-copy").addEventListener("click", () => {
+    const md = document.getElementById("output-preview").textContent;
+    navigator.clipboard.writeText(md).then(() => {
+      document.getElementById("btn-copy").textContent = "Copied ✓";
+      setTimeout(() => document.getElementById("btn-copy").textContent = "Copy ARS.md", 1500);
+    });
+  });
+  document.getElementById("btn-download").addEventListener("click", () => {
+    const md = document.getElementById("output-preview").textContent;
+    const blob = new Blob([md], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ARS.md";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+function openOutputModal() {
+  const { markdown, checklist } = compileARS();
+  const cl = document.getElementById("output-checklist");
+  cl.innerHTML = `
+    <h3>Upload alongside ARS.md</h3>
+    <ul>${checklist.length ? checklist.map(i => `<li>${i}</li>`).join("") : "<li>No additional files specified.</li>"}</ul>
+  `;
+  document.getElementById("output-preview").textContent = markdown;
+  document.getElementById("output-modal").classList.add("is-open");
+  document.getElementById("output-modal").setAttribute("aria-hidden", "false");
+}
+
+function closeOutputModal() {
+  document.getElementById("output-modal").classList.remove("is-open");
+  document.getElementById("output-modal").setAttribute("aria-hidden", "true");
+}
+
+document.addEventListener("DOMContentLoaded", init);
