@@ -37,22 +37,29 @@ function renderIntroScreen() {
   wizard.prepend(intro);
 }
 
-function goToSection(index) {
+function goToSection(index, skipValidation = false) {
+  // If we are moving forward from a section, validate it first
+  const currentIndex = ARS_STATE.currentSectionIndex;
+  if (!skipValidation && index > currentIndex && currentIndex >= 0) {
+    const isValid = validateCurrentSection(currentIndex);
+    if (!isValid) {
+      // If invalid, stop and don't move to the next section
+      return; 
+    }
+  }
+
   ARS_STATE.currentSectionIndex = index;
   const wizardContainer = document.getElementById("wizard");
   wizardContainer.classList.add("is-active");
 
-  // Hide all views
   document.querySelectorAll(".wizard-section, .intro-screen").forEach(el => el.classList.remove("is-active"));
 
   if (index === -1) {
-    // Show Intro
     document.querySelector(".intro-screen").classList.add("is-active");
     document.getElementById("nav-counter").textContent = "Introduction";
     document.getElementById("btn-prev").disabled = true;
     document.getElementById("btn-next").disabled = false; 
   } else {
-    // Show specific section
     if (index < 0 || index >= ARS_SECTIONS.length) return;
     const target = document.querySelector(`.wizard-section[data-index="${index}"]`);
     if (target) target.classList.add("is-active");
@@ -73,12 +80,21 @@ function goToSection(index) {
 function wireNav() {
   document.getElementById("btn-prev").addEventListener("click", () => {
     if (ARS_STATE.currentSectionIndex === -1) return;
-    goToSection(ARS_STATE.currentSectionIndex - 1);
+    goToSection(ARS_STATE.currentSectionIndex - 1, true); // Skip validation when going backwards
   });
   document.getElementById("btn-next").addEventListener("click", () => {
     goToSection(ARS_STATE.currentSectionIndex + 1);
   });
   document.getElementById("btn-compile").addEventListener("click", openOutputModal);
+  
+  // Reset Button
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    if (confirm("Are you sure you want to reset the form? All data will be lost.")) {
+      ARS_STATE.data = {};
+      ARS_STATE.completed = {};
+      location.reload(); // Reload the page to clear the DOM
+    }
+  });
 }
 
 function wireKeyboard() {

@@ -44,6 +44,7 @@ function renderField(sectionId, field) {
   const req = field.required ? `<span class="field__required">*</span>` : "";
   const help = field.help ? `<p class="field__help">${field.help}</p>` : "";
   const id = `f-${sectionId}-${field.id}`;
+  const errorHtml = `<span class="field__error" id="err-${id}">This field is required.</span>`;
 
   let control = "";
 
@@ -63,7 +64,7 @@ function renderField(sectionId, field) {
       ${help}
     </div>`;
   } else if (field.type === "radio") {
-    return `<fieldset class="field">
+    return `<fieldset class="field" id="${id}-group">
       <legend class="field__label">${field.label}${req}</legend>
       ${help}
       ${field.options.map(o => `
@@ -72,9 +73,10 @@ function renderField(sectionId, field) {
           <label class="field__label" for="${id}-${slug(o)}">${o}</label>
         </div>
       `).join("")}
+      ${errorHtml}
     </fieldset>`;
   } else if (field.type === "checkboxes") {
-    return `<fieldset class="field">
+    return `<fieldset class="field" id="${id}-group">
       <legend class="field__label">${field.label}${req}</legend>
       ${help}
       ${field.options.map(o => `
@@ -83,13 +85,15 @@ function renderField(sectionId, field) {
           <label class="field__label" for="${id}-${slug(o)}">${o}</label>
         </div>
       `).join("")}
+      ${errorHtml}
     </fieldset>`;
   }
 
-  return `<div class="field">
+  return `<div class="field" id="wrap-${id}">
     <label class="field__label" for="${id}">${field.label}${req}</label>
     ${help}
     ${control}
+    ${errorHtml}
   </div>`;
 }
 
@@ -99,10 +103,19 @@ function wireFieldEvents(sectionId, fields) {
 
   fields.forEach(field => {
     const id = `f-${sectionId}-${field.id}`;
+    
+    // Function to clear error state on input
+    const clearError = () => {
+      const wrap = document.getElementById(`wrap-${id}`) || document.getElementById(`${id}-group`);
+      if (wrap) wrap.classList.remove("has-error");
+    };
+
     if (field.type === "radio") {
       form.querySelectorAll(`input[name="${id}"]`).forEach(el => {
         el.addEventListener("change", e => {
           setSectionValue(sectionId, field.id, e.target.value);
+          clearError();
+          applyConditionalLogic(sectionId, field.id, e.target.value);
           markSectionProgress(sectionId);
         });
       });
@@ -111,6 +124,7 @@ function wireFieldEvents(sectionId, fields) {
         el.addEventListener("change", () => {
           const values = Array.from(form.querySelectorAll(`input[data-field="${field.id}"]:checked`)).map(i => i.value);
           setSectionValue(sectionId, field.id, values);
+          clearError();
           markSectionProgress(sectionId);
         });
       });
@@ -118,12 +132,14 @@ function wireFieldEvents(sectionId, fields) {
       const el = form.querySelector(`input[data-field="${field.id}"]`);
       if (el) el.addEventListener("change", e => {
         setSectionValue(sectionId, field.id, e.target.checked);
+        applyConditionalLogic(sectionId, field.id, e.target.checked);
         markSectionProgress(sectionId);
       });
     } else {
       const el = form.querySelector(`[data-field="${field.id}"]`);
       if (el) el.addEventListener("input", e => {
         setSectionValue(sectionId, field.id, e.target.value);
+        clearError();
         markSectionProgress(sectionId);
       });
     }
