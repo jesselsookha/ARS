@@ -137,4 +137,18 @@ See [`CHANGELOG.md`](CHANGELOG.md) for the full development history of this fram
 
 ---
 
+## About the Author
+
+Developed by **Jessel Sookha**, lecturer at Emeris.
+
+This tool was built to solve a problem we kept running into in the lecturer's room: how to use AI as a second marker in a way that supports consistency, defensibility, and fairness for students — without compromising the lecturer's final authority over assessment.
+
+Feedback, suggestions, and bug reports are welcome.
+
+**Contact:** jsookha@emeris.ac.za
+
+**LinkedIn:** https://www.linkedin.com/in/jesselsookha
+
+---
+
 *Developed for institutional use. If you adapt this framework for your own institution, please attribute the original.*
