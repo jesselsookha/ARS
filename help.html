@@ -1,80 +1,1723 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-ZA">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help — ARS.md Compiler</title>
-  <meta name="description" content="Deep dive guidance for each of the 15 sections of the Assessment Review Specification.">
-  <link rel="canonical" href="https://jesselsookha.github.io/ARS/help.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="assets/og-image.svg">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help — ARS.md Compiler</title>
+    <meta
+      name="description"
+      content="Deep dive guidance for each of the 15 sections of the Assessment Review Specification."
+    />
+    <link rel="canonical" href="https://jesselsookha.github.io/ARS/help.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/og-image.svg" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
 
-  <header class="app-header">
-    <div class="app-header__inner">
-      <h1 class="app-header__title">ARS<span class="app-header__dot">.</span>md</h1>
-      <p class="app-header__subtitle">Assessment Review Specification — compiler</p>
-      <nav class="app-header__nav">
-        <a href="index.html" class="app-header__link">Compiler</a>
-        <a href="help.html" class="app-header__link app-header__link--active">Help</a>
-        <a href="examples/index.html" class="app-header__link">Examples</a>
-      </nav>
+  <body>
+    <header class="app-header">
+      <div class="app-header__inner">
+        <h1 class="app-header__title">
+          ARS<span class="app-header__dot">.</span>md
+        </h1>
+        <p class="app-header__subtitle">
+          Assessment Review Specification — compiler
+        </p>
+        <nav class="app-header__nav">
+          <a href="index.html" class="app-header__link">Compiler</a>
+          <a href="help.html" class="app-header__link app-header__link--active"
+            >Help</a
+          >
+          <a href="examples/index.html" class="app-header__link">Examples</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="app-shell">
+      <aside class="sidebar sidebar--help" aria-label="Help navigation">
+        <p class="sidebar__heading">Sections</p>
+        <nav class="sidebar__nav">
+          <a href="#s1" class="sidebar__item">1. Assessment Overview</a>
+          <a href="#s2" class="sidebar__item">2. Purpose of AI Review</a>
+          <a href="#s3" class="sidebar__item">3. Marking Scope</a>
+          <a href="#s4" class="sidebar__item">4. Full Rubric</a>
+          <a href="#s5" class="sidebar__item">5. Submission Evidence</a>
+          <a href="#s6" class="sidebar__item">6. Insufficient Evidence</a>
+          <a href="#s7" class="sidebar__item">7. Lecturer Observations</a>
+          <a href="#s8" class="sidebar__item">8. Marking Philosophy</a>
+          <a href="#s9" class="sidebar__item">9. Special Cases</a>
+          <a href="#s10" class="sidebar__item">10. Output Format</a>
+          <a href="#s11" class="sidebar__item">11. Moderation Notes</a>
+          <a href="#s12" class="sidebar__item">12. Overrides</a>
+          <a href="#s13" class="sidebar__item">13. Feedback Style</a>
+          <a href="#s14" class="sidebar__item">14. Batch Processing</a>
+          <a href="#s15" class="sidebar__item">15. Assessment Files</a>
+        </nav>
+      </aside>
+      <main class="workspace help-content" id="top">
+        <h1 class="help-title">Help &amp; Deep-Dive Tutorial</h1>
+        <p class="help-intro">
+          This page explains each of the 15 sections of the ARS.md compiler —
+          what the section is for, why the AI needs it, and examples of good and
+          bad input.
+        </p>
+
+        <section id="s1" class="help-section">
+          <h2>1. Assessment Overview</h2>
+          <p><strong>Purpose:</strong></p>
+          <p>
+            The Assessment Overview establishes the identity and context of the
+            assessment. It provides the foundational information that helps the
+            AI understand what is being marked, who is responsible for the
+            assessment, what qualification the assessment belongs to, how many
+            marks are available, and whether the assessment is primarily
+            practical, theory-based, or a mixture of both.
+          </p>
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Before the AI can evaluate student work, it must first understand
+            the environment in which that work exists. A practical Web
+            Development assignment is assessed very differently from a
+            Psychology essay, Programming Logic test, or Business Management
+            project.
+          </p>
+
+          <p>
+            The Assessment Overview provides the contextual frame that
+            influences all later decisions such as evidence interpretation,
+            feedback style, marking philosophy, and application of the rubric.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            The Assessment Mode field is especially important. If a lecturer
+            identifies an assessment as "Practical", the AI expects evidence
+            such as source code, screenshots, repositories, diagrams,
+            applications, websites, databases, or project files.
+          </p>
+
+          <p>
+            If the assessment is identified as "Theory", the AI expects essays,
+            written responses, arguments, research discussions, references and
+            academic writing conventions.
+          </p>
+
+          <p>
+            Incorrect information in this section can cause the AI to approach
+            the entire assessment from the wrong perspective.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Module Name: Web Development
+Module Code: WEDE5020
+Qualification: Higher Certificate in Mobile Application and Web Development
+Assessment Name: Portfolio of Evidence Part 2
+Assessment Type: Portfolio of Evidence
+Assessment Mode: Practical
+Total Marks: 100
+Marks within AI Scope: 70
+          </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Module Name:
+Assessment:
+Total Marks: 100
+          </pre>
+
+          <p>
+            In the poor example the AI knows almost nothing about the
+            assessment. The missing information increases ambiguity and forces
+            the AI to make assumptions.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Lecturers often assume information is obvious because they know
+              the module well. The AI only sees the information supplied in the
+              conversation. Missing contextual fields frequently lead to
+              unnecessary clarification questions later.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Complete every field, even if it appears self-explanatory. Think
+              of this section as the cover page for the entire marking exercise.
+              If a new lecturer joined the module tomorrow, they should be able
+              to understand the assessment from this section alone.
+            </p>
+          </div>
+        </section>
+
+        <section id="s2" class="help-section">
+          <h2>2. Purpose of AI Review</h2>
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section tells the AI what role it should perform within the
+            marking process. Not every conversation requires the AI to act as a
+            marker. In some cases it may only provide moderation feedback, while
+            in others it may assist with student comments, quality assurance, or
+            second-marking.
+          </p>
+
+          <p>
+            This section helps establish authority, responsibility, and
+            limitations.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            A second marker behaves differently from a moderator. Likewise, a
+            feedback assistant behaves differently from somebody asked to
+            formally score work.
+          </p>
+
+          <p>
+            Without role clarity, the AI may begin performing tasks that were
+            never intended.
+          </p>
+
+          <p>
+            Examples include scoring work that should only be moderated,
+            offering feedback when only a marks review was requested, or
+            evaluating assessment sections that are outside scope.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            The role selected here determines how aggressively the AI evaluates
+            evidence and how much confidence should be placed in marks awarded.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Second Marker:</strong> Independently evaluates work.
+            </li>
+            <li>
+              <strong>Moderator:</strong> Reviews marking decisions and
+              consistency.
+            </li>
+            <li>
+              <strong>Feedback Assistant:</strong> Focuses on student-facing
+              comments.
+            </li>
+            <li>
+              <strong>Quality Assurance Reviewer:</strong> Examines assessment
+              quality and alignment.
+            </li>
+          </ul>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Role:
+Second Marker
+Feedback Assistant
+
+Role Description:
+The AI should independently assess the Responsive Design
+section worth 30 marks and provide detailed student-facing
+feedback for identified weaknesses.
+          </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Role:
+Marker
+          </pre>
+
+          <p>
+            The poor example provides no information about what the AI should
+            assess, how much authority it has, or what outputs should be
+            generated.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Selecting a role but failing to describe what that role means in
+              the context of the assessment. Different lecturers often use terms
+              such as "moderator" or "second marker" differently.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Assume the AI has never seen your assessment before. Write the
+              role description in plain language and explain exactly what you
+              want the AI to do, what it should review, and what it should
+              ignore.
+            </p>
+          </div>
+        </section>
+
+        <section id="s3" class="help-section">
+          <h2>3. Marking Scope</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            The Marking Scope defines the boundaries of the AI's authority. It
+            tells the AI exactly which sections of the assessment it is allowed
+            to score and which sections remain the responsibility of the
+            lecturer.
+          </p>
+
+          <p>
+            This is one of the most important sections in the ARS because it
+            prevents scope drift during marking.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Many assessments contain multiple components. For example, a Web
+            Development Portfolio may contain HTML, CSS, JavaScript, SEO,
+            GitHub, Documentation and Referencing components.
+          </p>
+
+          <p>
+            A lecturer may only wish the AI to review CSS and Responsive Design.
+          </p>
+
+          <p>
+            Without a clearly defined scope, the AI may inadvertently assess
+            sections that the lecturer intended to review personally.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>Scope determines:</p>
+
+          <ul>
+            <li>Which criteria receive marks.</li>
+            <li>Which evidence the AI analyses.</li>
+            <li>Which deductions may be applied.</li>
+            <li>Which comments should appear in feedback.</li>
+            <li>Which areas are ignored or reserved for lecturer review.</li>
+          </ul>
+
+          <p>
+            A well-defined scope improves consistency and reduces discrepancies
+            between different marking sessions.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Included Sections
+
+Desktop CSS Styling (40 marks)
+Responsive Design (30 marks)
+
+Total AI Scope: 70 marks
+
+Excluded Sections
+            
+HTML Structure
+JavaScript Functionality
+README Documentation
+GitHub Repository
+References
+          </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Assess the website.
+          </pre>
+
+          <p>
+            This instruction appears simple but creates significant ambiguity.
+            Does "the website" include responsiveness, functionality, GitHub
+            activity, documentation, references, performance and SEO? Different
+            reviewers may interpret this differently.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Listing the sections to be assessed but forgetting to list what
+              should not be assessed. Scope is defined by both inclusion and
+              exclusion.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Think of the scope as a formal contract between the lecturer and
+              the AI. Explicitly identify what the AI may score, what it may
+              review without scoring, and what remains entirely outside its
+              authority.
+            </p>
+          </div>
+        </section>
+
+        <section id="s4" class="help-section">
+          <h2>4. Full Rubric</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            The Full Rubric is the most important assessment document that the
+            AI receives. It defines how marks are allocated, what evidence
+            students are expected to provide, and what standards distinguish
+            weak, satisfactory, strong and exceptional submissions.
+          </p>
+
+          <p>
+            While Section 3 defines what the AI is authorised to score, Section
+            4 defines how those marks should be awarded.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            The AI cannot reliably assess work without understanding the
+            criteria against which the work is being judged.
+          </p>
+
+          <p>
+            Different assessments often use the same terminology but mean
+            completely different things. For example, the word "functionality"
+            in a Web Development assignment may refer to JavaScript behaviour,
+            while "application" in a Psychology assignment may refer to applying
+            theory to a case study.
+          </p>
+
+          <p>
+            The rubric provides the standards and expectations that allow marks
+            to be allocated consistently.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            Every mark awarded should be traceable back to a rubric criterion.
+          </p>
+
+          <p>
+            If the rubric is incomplete, unclear, or unavailable, the AI is
+            forced to make assumptions about what the assessment values most.
+          </p>
+
+          <p>
+            Strong rubrics reduce inconsistencies between markers, moderation
+            challenges, and disputes regarding marks.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Criterion: Gallery Lightbox
+Marks Available: 5
+
+Full Marks:
+  Gallery is fully functional, responsive,
+  accessible, and integrated throughout the website.
+
+Partial Marks:
+  Gallery functions but contains minor issues.
+
+Low Marks:
+  Gallery exists but functionality is incomplete.
+
+Zero:
+  No evidence of a gallery lightbox.
+          </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Gallery - 5 Marks
+          </pre>
+
+          <p>
+            In this example the criterion exists, but there is no indication of
+            what differentiates excellent work from poor work. This introduces
+            subjective interpretation and inconsistency.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Lecturers often upload only a marks table without the performance
+              descriptors. The marks may be available, but the AI cannot
+              determine what quality level is expected for each band.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Provide the complete rubric whenever possible, including mark
+              bands and performance descriptions. If only the assessment
+              document is available, allow the AI to reconstruct the rubric and
+              confirm it with you before marking begins.
+            </p>
+          </div>
+        </section>
+
+        <section id="s5" class="help-section">
+          <h2>5. Submission Evidence Available</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section tells the AI what evidence is available for review.
+            Understanding the available evidence is just as important as
+            understanding the rubric.
+          </p>
+
+          <p>
+            Students often submit incomplete packages. A lecturer might have
+            source code but no screenshots, screenshots but no repository
+            access, or essays without the reference files used during
+            moderation.
+          </p>
+
+          <p>
+            This section ensures that the AI understands what materials it can
+            legitimately evaluate.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>The AI can only assess what it can verify.</p>
+
+          <p>
+            If a student claims functionality exists but no evidence is
+            supplied, the AI must know whether repository files, screenshots,
+            lecturer notes, or other supporting materials are available before
+            reaching a judgement.
+          </p>
+
+          <p>
+            Establishing evidence availability early reduces confusion and
+            prevents accidental assumptions.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>The evidence supplied determines confidence in awarded marks.</p>
+
+          <p>For example:</p>
+
+          <ul>
+            <li>
+              A working GitHub repository provides stronger evidence than
+              screenshots alone.
+            </li>
+            <li>
+              A complete essay provides stronger evidence than a summary
+              document.
+            </li>
+            <li>
+              Source code is generally more reliable than screenshots of code.
+            </li>
+          </ul>
+
+          <p>
+            If critical evidence is missing, marks may need to be reduced
+            depending on the policy selected in Section 6.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Evidence Supplied:  
+
+  ✓ Source Code
+  ✓ Screenshots
+  ✓ GitHub Repository
+  ✓ README Document
+  ✓ Changelog
+  ✓ Lecturer Observations
+  ✓ Assessment Rubric
+          </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Files uploaded.
+          </pre>
+
+          <p>
+            This provides no clarity regarding what files exist, which files are
+            relevant, or whether enough evidence has been supplied to support
+            the assessment process.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Assuming the AI automatically understands what evidence has been
+              provided. Different assessments require different evidence types,
+              and lecturers frequently forget to specify missing or unavailable
+              files.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Think like an external moderator. If somebody unfamiliar with the
+              assignment received the submission package, would they immediately
+              know what evidence exists and what is missing? If not, expand this
+              section.
+            </p>
+          </div>
+        </section>
+
+        <section id="s6" class="help-section">
+          <h2>6. Insufficient Evidence Handling</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section defines how the AI should handle situations where
+            evidence is missing, incomplete, inaccessible, corrupted, or
+            impossible to verify.
+          </p>
+
+          <p>
+            Every assessment eventually encounters this situation. A student may
+            forget to submit files, upload the wrong document, submit
+            screenshots instead of source files, or include references to work
+            that cannot be verified.
+          </p>
+
+          <p>
+            Rather than forcing the AI to make case-by-case decisions, this
+            section establishes a consistent policy.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Missing evidence is one of the most common causes of marking
+            inconsistency.
+          </p>
+
+          <p>
+            Without guidance, one reviewer might award partial marks for
+            unverified work while another reviewer awards zero. This creates
+            moderation challenges and uncertainty.
+          </p>
+
+          <p>
+            A predefined policy ensures that similar situations are handled
+            consistently throughout an entire cohort.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            The selected policy controls what happens when required evidence
+            cannot be verified.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Award Zero:</strong> Missing evidence automatically
+              receives no marks.
+            </li>
+            <li>
+              <strong>Award Zero and Flag:</strong> No marks awarded, but
+              lecturer reviews the case.
+            </li>
+            <li>
+              <strong>Pause and Request Evidence:</strong> Assessment cannot
+              proceed until clarification is provided.
+            </li>
+          </ul>
+
+          <p>
+            This section also governs how partial evidence should be handled and
+            how referencing concerns should be reported.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Selected Policy:
+
+Award Zero and Flag for Lecturer Review
+
+Rationale:
+
+If functionality cannot be verified through source files,
+repository access or screenshots, marks cannot be awarded.
+Cases should still be flagged for moderation review.
+  </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Use your judgement.
+  </pre>
+
+          <p>
+            The purpose of this section is to remove ambiguity. Directing the AI
+            to "use judgement" without providing a policy introduces
+            inconsistency between students and marking sessions.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Many lecturers know how they would personally handle missing
+              evidence, but forget to communicate that approach to the AI. The
+              result is that different conversations may handle identical
+              situations differently.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Decide on your evidence policy before marking begins and apply it
+              consistently across the entire cohort. If moderation is likely,
+              "Award Zero and Flag" is often the safest approach because it
+              preserves consistency while still allowing lecturer review.
+            </p>
+          </div>
+        </section>
+
+        <section id="s7" class="help-section">
+          <h2>7. Lecturer Observations</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section captures information known by the lecturer that may not
+            be visible within the assessment submission itself. It acts as a
+            bridge between formal submission evidence and the lecturer's
+            first-hand observations of the student's work, behaviour, or
+            submission process.
+          </p>
+
+          <p>
+            In many cases, the lecturer possesses important contextual
+            information that cannot be discovered by reviewing the submitted
+            files alone.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            The AI only sees the evidence supplied during the conversation. It
+            does not attend classes, monitor submission timelines, view LMS
+            activity, or observe interactions between students and lecturers.
+          </p>
+
+          <p>
+            This section allows important observations to become part of the
+            review process without altering the evidence-based marking
+            philosophy.
+          </p>
+
+          <p>
+            Lecturer observations should not automatically change marks unless
+            they relate directly to the rubric, but they should inform concerns,
+            recommendations, moderation notes, and future guidance.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            Lecturer observations are carried into the student's feedback under
+            the Submission &amp; Repository Concerns section.
+          </p>
+
+          <p>
+            They may also influence the lecturer's confidence in the final mark
+            and help explain unusual circumstances that could otherwise be
+            misunderstood.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+The repository was not submitted by the due date.
+
+The student demonstrated a working system in class, but
+the repository uploaded for assessment appears incomplete.
+
+Several required files are missing from the final submission.
+  </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Student is lazy.
+
+Student probably copied this.
+  </pre>
+
+          <p>
+            Observations should be factual, professional and evidence-based.
+            Subjective opinions, assumptions and emotionally charged language
+            should not appear in this section.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Including assumptions instead of observations. Statements such as
+              "the student did not try" or "the student clearly used AI for
+              everything" are interpretations rather than observations unless
+              supported by evidence.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Write observations as if they may later be reviewed by a
+              moderator, programme coordinator or external examiner. Focus on
+              what can be observed, verified or documented rather than what is
+              suspected.
+            </p>
+          </div>
+        </section>
+
+        <section id="s8" class="help-section">
+          <h2>8. Marking Philosophy</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section establishes the principles that guide marking
+            decisions. While the rubric explains what should be assessed, the
+            marking philosophy explains how judgements should be made when
+            interpreting the evidence.
+          </p>
+
+          <p>
+            Think of this section as the assessment's "constitution". It
+            provides the overarching principles that apply to every criterion
+            and every student.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Different lecturers often approach marking differently. Some favour
+            a generous interpretation of evidence, while others apply stricter
+            standards.
+          </p>
+
+          <p>
+            Without a clearly stated philosophy, identical student submissions
+            may receive different results across different conversations.
+          </p>
+
+          <p>
+            This section helps ensure consistency by defining the standards that
+            should govern all marking decisions.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            The marking philosophy influences how marks are awarded, how
+            deductions are justified, and how uncertain situations are handled.
+          </p>
+
+          <p>It affects decisions such as:</p>
+
+          <ul>
+            <li>Whether partial evidence justifies partial marks.</li>
+            <li>How incomplete implementations should be handled.</li>
+            <li>How strongly the AI should rely on observable evidence.</li>
+            <li>How much confidence is required before awarding full marks.</li>
+          </ul>
+
+          <h3>Good Example</h3>
+
+          <pre>
+The AI must:
+
+- Mark only observable evidence.
+- Avoid assumptions.
+- Apply the rubric consistently.
+- Justify deductions clearly.
+- Maintain consistent standards across the cohort.
+
+The AI must not:
+
+- Award marks for claimed functionality.
+- Assume hidden work exists.
+- Award marks purely for effort.
+  </pre>
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Be fair.
+  </pre
+          >
+
+          <p>
+            While fairness is important, the term means different things to
+            different people. Effective marking philosophies provide specific
+            guidance that can be applied consistently.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Writing principles that are too vague. Instructions such as "be
+              reasonable", "be flexible" or "be fair" may sound useful but
+              provide little practical guidance when difficult marking decisions
+              arise.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Focus on evidence, consistency, transparency and justification. If
+              a lecturer, moderator and AI all follow the same philosophy, they
+              should arrive at similar conclusions when reviewing the same
+              submission.
+            </p>
+          </div>
+        </section>
+
+        <section id="s9" class="help-section">
+          <h2>9. Special Cases</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section defines exceptions, caps, limitations and recurring
+            assessment-specific rules that are not fully covered by the rubric.
+          </p>
+
+          <p>
+            Every assessment eventually encounters situations where students
+            have technically attempted a task but have done so in a way that
+            prevents full marks from being justified.
+          </p>
+
+          <p>
+            Special Cases provide a mechanism to apply these decisions
+            consistently across an entire cohort.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Without predefined special-case rules, similar submissions may be
+            treated differently in separate marking sessions.
+          </p>
+
+          <p>
+            This section converts commonly applied lecturer decisions into
+            documented rules that can be applied consistently and transparently.
+          </p>
+
+          <p>
+            It is especially useful when marking large cohorts where similar
+            mistakes occur repeatedly.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>Special Cases may:</p>
+
+          <ul>
+            <li>Cap maximum marks.</li>
+            <li>Trigger automatic deductions.</li>
+            <li>Require lecturer review.</li>
+            <li>Define treatment of unusual submissions.</li>
+            <li>Standardise recurring moderation decisions.</li>
+          </ul>
+
+          <p>These rules supplement the rubric; they should not replace it.</p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Responsive Design
+
+Maximum 15/30 if no tablet and mobile screenshots
+are supplied.
+
+Pseudo-Classes
+
+Maximum 8/10 if only :hover is implemented.
+
+Essay Assessment
+
+Critical Analysis cannot exceed 50% if discussion
+remains entirely descriptive.
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Reduce marks if the work doesn't look good.
+  </pre
+          >
+
+          <p>
+            This instruction is subjective and impossible to apply consistently.
+            Special Cases must be measurable, observable and defensible.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Attempting to solve every possible assessment scenario through
+              Special Cases. These rules should address recurring situations,
+              not replace professional judgement or the rubric itself.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Add a Special Case only when you know the same issue is likely to
+              occur repeatedly across multiple students. If you find yourself
+              making the same moderation adjustment several times, it probably
+              belongs in this section for future cohorts.
+            </p>
+          </div>
+        </section>
+
+        <section id="s10" class="help-section">
+          <h2>10. Output Format</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section defines how the AI should present its marking output.
+            While many lecturers focus heavily on marks, the presentation of
+            those marks is equally important. A well-structured review improves
+            readability, consistency, moderation and student understanding.
+          </p>
+
+          <p>
+            The Output Format ensures that every student receives feedback in a
+            predictable and organised structure.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Different lecturers have different expectations regarding feedback.
+            Some prefer marks only, while others want detailed
+            criterion-by-criterion commentary and extensive student-facing
+            feedback.
+          </p>
+
+          <p>
+            Without clear instructions, the AI may provide either too much or
+            too little information for the intended audience.
+          </p>
+
+          <p>
+            Defining the format upfront creates consistency across the entire
+            cohort and reduces the need for repeated formatting corrections.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>The Output Format determines:</p>
+
+          <ul>
+            <li>How marks are presented.</li>
+            <li>Whether comments appear per criterion.</li>
+            <li>How subtotals are displayed.</li>
+            <li>The order of feedback sections.</li>
+            <li>The information provided to students and moderators.</li>
+          </ul>
+
+          <p>
+            It directly affects moderation readability and the usefulness of the
+            generated feedback.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Format B – Marks and Comments
+
+Required Sections:
+
+1. Student Identification
+2. Marks Table
+3. Total Mark
+4. Feedback
+5. Submission Concerns
+6. Areas That Need Attention
+7. Lecturer Moderation Notes
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Provide feedback.
+  </pre
+          >
+
+          <p>
+            The poor example gives no structure, making it likely that outputs
+            will vary across different conversations and assessment sessions.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Focusing only on the marks table and forgetting the supporting
+              narrative. Marks explain what was awarded. Feedback explains why
+              the marks were awarded.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Decide how the final output will be used before selecting a
+              format. Student-facing reviews generally require more detail,
+              while moderation reviews may benefit from concise, high-signal
+              outputs.
+            </p>
+          </div>
+        </section>
+
+        <section id="s11" class="help-section">
+          <h2>11. Lecturer Moderation Notes</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            Lecturer Moderation Notes are intended for the lecturer, moderator,
+            or quality assurance reviewer rather than the student. This section
+            provides a concise summary of the AI's confidence in the mark
+            awarded and highlights any concerns that may warrant additional
+            review.
+          </p>
+
+          <p>Think of this section as executive-level assessment notes.</p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Student-facing feedback and lecturer-facing moderation notes serve
+            different purposes.
+          </p>
+
+          <p>
+            A student may need developmental guidance and encouragement, whereas
+            a moderator may need to know whether repository evidence was
+            incomplete, whether mark confidence is low, or whether unusual
+            circumstances affected the review.
+          </p>
+
+          <p>
+            Separating these audiences improves the quality of communication.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>Moderation notes help:</p>
+
+          <ul>
+            <li>Identify submissions requiring lecturer review.</li>
+            <li>Explain unusual marking decisions.</li>
+            <li>Highlight confidence levels.</li>
+            <li>Flag concerns about evidence quality.</li>
+            <li>Support future moderation discussions.</li>
+          </ul>
+
+          <p>
+            In large cohorts, these notes can significantly reduce the time
+            required for moderation and quality assurance activities.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Repository evidence is partially incomplete,
+reducing confidence in responsive design marks.
+
+Implementation appears consistent with screenshots,
+but some functionality could not be verified.
+
+Recommend lecturer review before finalising marks.
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Good work.
+  </pre
+          >
+
+          <p>
+            This statement provides no useful moderation information and does
+            not assist the lecturer in validating the assessment outcome.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Repeating student feedback instead of providing moderation
+              insights. The moderator already has access to the student
+              comments. This section should focus on confidence, concerns and
+              review recommendations.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Keep moderation notes short but meaningful. A moderator should be
+              able to understand the key concern or confidence indicator within
+              a few seconds of reading the note.
+            </p>
+          </div>
+        </section>
+
+        <section id="s12" class="help-section">
+          <h2>12. Assignment-Specific Overrides</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            Assignment-Specific Overrides allow lecturers to extend the standard
+            ARS rules with instructions unique to a particular assessment. These
+            rules are typically developed through experience, moderation
+            discussions, or lessons learned from previous cohorts.
+          </p>
+
+          <p>
+            Overrides provide an opportunity to formalise recurring marking
+            decisions that would otherwise need to be explained repeatedly.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            No template can perfectly accommodate every assessment. Certain
+            modules, projects, essays or practical tasks often contain unique
+            requirements that are difficult to express solely through the
+            rubric.
+          </p>
+
+          <p>
+            Overrides allow the lecturer to customise assessment behaviour while
+            still benefiting from the consistency of the broader framework.
+          </p>
+
+          <p>
+            They are particularly useful for practical assessments where
+            recurring implementation issues regularly affect marking decisions.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>
+            Overrides take precedence over general assumptions and help ensure
+            recurring issues are handled consistently.
+          </p>
+
+          <p>Examples include:</p>
+
+          <ul>
+            <li>Maximum marks for incomplete implementation.</li>
+            <li>Requirements for multiple pages or files.</li>
+            <li>Caps applied when evidence is insufficient.</li>
+            <li>Additional moderation checks.</li>
+            <li>Assessment-specific interpretation rules.</li>
+          </ul>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Override 1
+
+Maximum 5/10 for External Stylesheet
+if only one HTML page is supplied.
+
+Override 2
+
+Responsive Design cannot exceed 15/30
+if no tablet or mobile screenshots are provided.
+
+Override 3
+
+Critical Analysis cannot exceed 10/20
+if discussion is purely descriptive.
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Use common sense.
+
+Be stricter than normal.
+  </pre
+          >
+
+          <p>
+            These instructions are subjective and difficult to apply
+            consistently. Overrides should be measurable, observable and
+            directly linked to assessment requirements.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Attempting to rewrite the rubric using overrides. Overrides should
+              complement the rubric, not duplicate it. If an instruction already
+              exists clearly within the rubric, it generally does not need to
+              appear here.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Add overrides only when they solve a recurring marking problem. If
+              you find yourself repeatedly explaining the same moderation
+              decision across multiple students or cohorts, it likely belongs in
+              this section.
+            </p>
+          </div>
+        </section>
+
+        <section id="s13" class="help-section">
+          <h2>13. Feedback Style and Sample Feedback</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section defines how feedback should be written. While the
+            rubric, marks and moderation process determine what is being
+            assessed, the Feedback Style section determines how the results are
+            communicated to students.
+          </p>
+
+          <p>
+            Different lecturers have different expectations regarding feedback.
+            Some prefer detailed developmental comments, while others want
+            concise, high-impact observations. This section ensures that
+            feedback remains consistent across an entire cohort.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            The same assessment outcome can be communicated in many different
+            ways. Without guidance, one response may contain several paragraphs
+            of analysis, while another may contain only a few bullet points.
+          </p>
+
+          <p>
+            Providing feedback expectations helps the AI align with the
+            lecturer's preferred tone, level of detail, structure and language
+            style.
+          </p>
+
+          <p>
+            Sample feedback is especially valuable because it demonstrates how
+            the lecturer naturally communicates with students.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>This section governs:</p>
+
+          <ul>
+            <li>The amount of feedback generated.</li>
+            <li>The tone used with students.</li>
+            <li>The balance between strengths and weaknesses.</li>
+            <li>The level of explanation provided for deductions.</li>
+            <li>The consistency of outputs across multiple students.</li>
+          </ul>
+
+          <p>
+            Well-defined feedback expectations improve student understanding and
+            make moderation easier because similar issues receive similar
+            explanations.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Feedback Detail Level:
+Extended Prose
+
+Style Requirements:
+
+- Professional
+- Constructive
+- Evidence-based
+- Student-facing
+- Explain all deductions
+- Include improvement recommendations
+
+Sample Feedback Supplied:
+Yes (3 examples attached)
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Give feedback.
+  </pre
+          >
+
+          <p>
+            While technically correct, the instruction provides no guidance
+            regarding tone, detail level, preferred wording, student audience or
+            lecturer expectations.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Assuming that all lecturers define "good feedback" in the same
+              way. Some prefer concise comments, while others expect detailed
+              narrative explanations. The AI cannot infer these preferences
+              reliably unless they are described here.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Provide two or three examples of real feedback that you would
+              happily release to students. These examples often teach the AI
+              more about your communication style than the written instructions
+              alone.
+            </p>
+          </div>
+        </section>
+
+        <section id="s14" class="help-section">
+          <h2>14. Batch Processing Rules</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section governs how the AI should handle situations where
+            multiple student submissions are reviewed within the same
+            conversation.
+          </p>
+
+          <p>
+            Most marking exercises involve cohorts rather than individual
+            students. As the number of submissions increases, consistency
+            becomes increasingly important.
+          </p>
+
+          <p>
+            Batch Processing Rules help maintain fairness and ensure that
+            standards remain stable throughout the review process.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Without clear batch-processing rules, large conversations can become
+            difficult to manage. Students may accidentally be compared against
+            one another, marking standards may shift over time, or outputs may
+            become inconsistent between responses.
+          </p>
+
+          <p>
+            These rules help the AI treat each submission independently while
+            still maintaining alignment across the entire cohort.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>Batch Processing Rules affect:</p>
+
+          <ul>
+            <li>How many students are processed per response.</li>
+            <li>Consistency across multiple marking sessions.</li>
+            <li>Treatment of individual submissions.</li>
+            <li>Moderation alignment within a cohort.</li>
+            <li>Output organisation and readability.</li>
+          </ul>
+
+          <p>
+            They are particularly valuable when marking practical assessments
+            that may contain dozens or even hundreds of student submissions.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Process six students per response.
+
+Review each student independently.
+
+Do not compare students.
+
+Maintain consistent standards throughout
+the cohort.
+
+Follow moderator-approved examples where supplied.
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Review all students.
+  </pre
+          >
+
+          <p>
+            This instruction provides no guidance regarding workload, output
+            structure, consistency requirements or cohort management.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Allowing submissions to be compared against each other.
+              Assessments should be measured against the rubric and marking
+              philosophy, not against other students within the cohort.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Define a practical number of submissions per response and keep
+              that number consistent. This improves quality control, reduces
+              cognitive load and helps maintain stable marking standards.
+            </p>
+          </div>
+        </section>
+
+        <section id="s15" class="help-section">
+          <h2>15. Assessment Files Supplied</h2>
+
+          <p><strong>Purpose:</strong></p>
+
+          <p>
+            This section acts as a final verification checklist before marking
+            begins. It allows lecturers to confirm which assessment materials
+            have been uploaded and which supporting documents are available for
+            review.
+          </p>
+
+          <p>
+            Think of this section as the handover package presented to the AI
+            before any assessment activity starts.
+          </p>
+
+          <p><strong>Why the AI needs this information:</strong></p>
+
+          <p>
+            Many marking problems originate from missing documents rather than
+            poor assessment instructions. If important files are not supplied,
+            the AI may be unable to interpret the rubric correctly, verify
+            evidence, or provide meaningful feedback.
+          </p>
+
+          <p>
+            This checklist creates transparency by explicitly identifying what
+            has been provided and what remains unavailable.
+          </p>
+
+          <p><strong>How this section influences marking:</strong></p>
+
+          <p>The supplied materials directly influence:</p>
+
+          <ul>
+            <li>Confidence in marking decisions.</li>
+            <li>The ability to verify evidence.</li>
+            <li>Feedback quality.</li>
+            <li>Moderation readiness.</li>
+            <li>Handling of missing information.</li>
+          </ul>
+
+          <p>
+            It also helps identify missing resources before significant time is
+            spent reviewing student submissions.
+          </p>
+
+          <h3>Good Example</h3>
+
+          <pre>
+Files Supplied:
+
+✓ Completed ARS.md
+✓ CHANGELOG.md
+✓ Assessment Brief
+✓ Full Rubric
+✓ Student Submissions
+✓ Lecturer Observations
+✓ Sample Feedback
+
+Not Supplied:
+
+✗ Memorandum
+  </pre
+          >
+
+          <h3>Poor Example</h3>
+
+          <pre>
+Everything required has been uploaded.
+  </pre
+          >
+
+          <p>
+            This statement may be true, but it does not help the AI determine
+            what documents actually exist or whether certain files were
+            unintentionally omitted.
+          </p>
+
+          <div class="help-tip">
+            <strong>Common Mistake</strong>
+            <p>
+              Assuming that the AI can automatically identify whether every
+              required document has been supplied. The AI can only evaluate what
+              has been shared in the conversation and may not know whether
+              something important is missing unless the lecturer confirms it
+              here.
+            </p>
+          </div>
+
+          <div class="help-tip success">
+            <strong>Best Practice</strong>
+            <p>
+              Treat this section like a pre-flight checklist. Before marking
+              begins, verify that all required files have been uploaded, are
+              accessible, and correspond to the assessment being reviewed. A few
+              moments spent here can prevent significant confusion later.
+            </p>
+          </div>
+        </section>
+
+        <section id="closing-note" class="help-section closing-note">
+          <h2>Final Thoughts Before You Start</h2>
+
+          <p>
+            The Assessment Review Specification (ARS) is more than a template.
+            It is a communication framework between the lecturer and the AI.
+          </p>
+
+          <p>
+            The quality of the results you receive is directly influenced by the
+            quality of the information you provide. A well-completed ARS gives
+            the AI the context, boundaries, evidence expectations, marking
+            philosophy and operational rules required to support consistent,
+            transparent and defensible assessment decisions.
+          </p>
+
+          <p>
+            Before starting a new conversation, pause for a moment and consider:
+          </p>
+
+          <ul>
+            <li>Do I understand the purpose of this assessment?</li>
+            <li>Have I clearly defined the AI's role?</li>
+            <li>Have I clearly explained what may and may not be assessed?</li>
+            <li>Have I supplied the rubric and supporting evidence?</li>
+            <li>Have I documented any important lecturer observations?</li>
+            <li>Have I explained how missing evidence should be handled?</li>
+            <li>Have I provided examples of the feedback style I expect?</li>
+          </ul>
+
+          <p>Most importantly, ask yourself:</p>
+
+          <blockquote>
+            Why am I having this conversation?
+            <br /><br />
+            What outcome am I hoping to achieve?
+            <br /><br />
+            What decisions do I need the AI to assist me with?
+          </blockquote>
+
+          <p>
+            The ARS works best when it is completed deliberately and
+            thoughtfully. Taking the time to provide good information at the
+            beginning of the process will usually result in more accurate
+            reviews, stronger feedback, improved moderation support and a more
+            productive conversation overall.
+          </p>
+
+          <p>
+            Remember that the AI supports the assessment process, but
+            responsibility for teaching, assessment decisions, moderation and
+            final marks remains with the lecturer. The ARS simply helps ensure
+            that both the lecturer and the AI are working from the same
+            understanding.
+          </p>
+          <br>
+          <a href="#top" class="back-to-top">↑ Back to top</a>
+        </section>
+      </main>
     </div>
-  </header>
 
-  <div class="app-shell">
-    <aside class="sidebar sidebar--help" aria-label="Help navigation">
-      <p class="sidebar__heading">Sections</p>
-      <nav class="sidebar__nav">
-        <a href="#s1" class="sidebar__item">1. Assessment Overview</a>
-        <a href="#s2" class="sidebar__item">2. Purpose of AI Review</a>
-        <a href="#s3" class="sidebar__item">3. Marking Scope</a>
-        <a href="#s4" class="sidebar__item">4. Full Rubric</a>
-        <a href="#s5" class="sidebar__item">5. Submission Evidence</a>
-        <a href="#s6" class="sidebar__item">6. Insufficient Evidence</a>
-        <a href="#s7" class="sidebar__item">7. Lecturer Observations</a>
-        <a href="#s8" class="sidebar__item">8. Marking Philosophy</a>
-        <a href="#s9" class="sidebar__item">9. Special Cases</a>
-        <a href="#s10" class="sidebar__item">10. Output Format</a>
-        <a href="#s11" class="sidebar__item">11. Moderation Notes</a>
-        <a href="#s12" class="sidebar__item">12. Overrides</a>
-        <a href="#s13" class="sidebar__item">13. Feedback Style</a>
-        <a href="#s14" class="sidebar__item">14. Batch Processing</a>
-        <a href="#s15" class="sidebar__item">15. Assessment Files</a>
-      </nav>
-    </aside>
+    <footer class="app-footer">
+      <p>ARS.md Compiler — static tool. No data is saved to a server.</p>
+      <p>
+        <a
+          href="https://github.com/jesselsookha/ARS"
+          target="_blank"
+          rel="noopener"
+          >View Source</a
+        >
+      </p>
+    </footer>
+    <script>
+    // Highlight the current sidebar item based on scroll position
+    const sections = document.querySelectorAll(".help-section");
+    const sidebarItems = document.querySelectorAll(".sidebar--help .sidebar__item");
 
-    <main class="workspace help-content">
-      <h1 class="help-title">Help &amp; Deep-Dive Tutorial</h1>
-      <p class="help-intro">This page explains each of the 15 sections of the ARS.md compiler — what the section is for, why the AI needs it, and examples of good and bad input.</p>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          sidebarItems.forEach(item => {
+            item.classList.toggle("is-current", item.getAttribute("href") === `#${id}`);
+          });
+        }
+      });
+    }, {
+      rootMargin: "-30% 0px -60% 0px"
+    });
 
-      <section id="s1" class="help-section">
-        <h2>1. Assessment Overview</h2>
-        <p><strong>What it is:</strong> The identity and context of the assessment — module, lecturer, marks, mode.</p>
-        <p><strong>Why the AI needs it:</strong> The AI uses this to frame every judgement. A "Theory" assessment with an essay criterion will be marked very differently from a "Practical" assessment with a CSS rubric.</p>
-        <h3>Good example</h3>
-        <pre>Module: WEDE5020 — Web Development (Introduction)
-Mode: Practical
-Total marks: 70 (CSS &amp; Responsive Design section only)</pre>
-        <h3>What to avoid</h3>
-        <pre>Module: [empty]
-Total marks: 100</pre>
-        <p>The AI cannot make informed decisions without knowing what it's marking.</p>
-      </section>
-
-      <!-- Repeat the above block for sections 2–15 -->
-
-    </main>
-  </div>
-
-  <footer class="app-footer">
-    <p>ARS.md Compiler — static tool. No data is saved to a server.</p>
-    <p><a href="https://github.com/jesselsookha/ARS" target="_blank" rel="noopener">View Source</a></p>
-  </footer>
-</body>
+    sections.forEach(section => observer.observe(section));
+</script>
+  </body>
 </html>
