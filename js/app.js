@@ -100,6 +100,10 @@ function renderIntroScreen(hasDraft) {
       <input type="text" id="input-draft-name" placeholder="e.g., WEDE2020 Part 2" style="width: 100%; max-width: 400px; padding: 0.6rem; border: 1.5px solid var(--rule); border-radius: var(--radius-sm); font-family: var(--font-body);">
     </div>
     ` + standardIntro + `
+    <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--ink-soft);">
+      <strong>Prefer to write your own ARS by hand?</strong> 
+      <a href="ARS-template.md" download style="color: var(--interactive); text-decoration: underline;">Download the blank template</a>.
+    </p>
     <button class="btn btn--primary" onclick="setDraftName(); goToSection(0);">Begin Assessment Overview →</button>
     `;
   }
