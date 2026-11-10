@@ -8,13 +8,7 @@ function getArray(sectionId, fieldId) {
   return getSectionValue(sectionId, fieldId) || [];
 }
 
-function getLineList(sectionId, fieldId) {
-  const val = getSectionValue(sectionId, fieldId);
-  if (!val) return "- [Not specified]";
-  return val.split("\n").map(line => `- ${line.trim()}`).filter(line => line !== "-").join("\n");
-}
-
-// Helper to render checkboxes based on selections
+// Helper to render checkboxes: marks [x] next to each selected value
 function renderCheckboxOptions(options, selectedValues) {
   const selected = Array.isArray(selectedValues) ? selectedValues : [];
   return options.map(opt => {
@@ -23,18 +17,18 @@ function renderCheckboxOptions(options, selectedValues) {
   }).join("\n");
 }
 
-// Helper to render radio options
+// Helper to render radio options: marks [x] next to the selected value
+// NOTE: Radio values are stored as a single string. Comparison is direct.
 function renderRadioOptions(options, selectedValue) {
   return options.map(opt => {
-    const isChecked = (opt === selectedValue) ? "x" : " ";
-    return `- [${isChecked}] **${opt}**`;
+    const isChecked = (String(opt).trim() === String(selectedValue).trim()) ? "x" : " ";
+    return `- [${isChecked}] ${opt}`;
   }).join("\n");
 }
 
 function compileARS() {
-  // --- Extract Data ---
   const d = (sec, field) => getSectionValue(sec, field) || "";
-  
+
   // Section 1
   const moduleName = d("overview", "moduleName") || "[Not specified]";
   const moduleCode = d("overview", "moduleCode") || "[Not specified]";
@@ -57,31 +51,76 @@ function compileARS() {
   const excluded = d("scope", "excludedSections") || "None specified.";
   const markWhole = getSectionValue("scope", "markWhole") ? "Yes" : "No";
 
-  // Section 4
+  // Section 4 — Rubric source
   const rubricSource = d("rubric", "rubricSource");
   const rubricText = d("rubric", "rubricText");
 
-  // Section 5
-  const evidenceItems = getArray("evidence", "evidenceItems");
+  // Define the exact option strings used in the ARS.md structure
+  const rubricSourceOptions = [
+    "Option 1 — Compiled directly in this ARS. The lecturer has entered the full rubric below (Section 4b). Proceed to 4b.",
+    "Option 2 — Assessment document uploaded. The full assessment document has been uploaded in the chat. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.",
+    "Option 3 — Markdown conversion uploaded. A Markdown version of the assessment document has been uploaded. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.",
+    "Option 4 — Copy-paste from source document. The lecturer has pasted the rubric text directly into the chat. The AI must reconstruct the rubric structure, present its reconstruction (Section 4c), and only proceed once confirmed."
+  ];
 
-  // Section 6
+  // Match the lecturer's form choice ("Compiled directly in ARS.md" etc.)
+  // against the full descriptive option. This bridges the two value formats.
+  const rubricChoiceMap = {
+    "Compiled directly in ARS.md": rubricSourceOptions[0],
+    "Assessment document uploaded": rubricSourceOptions[1],
+    "Markdown conversion uploaded": rubricSourceOptions[2],
+    "Copy-paste from source document": rubricSourceOptions[3]
+  };
+  const rubricSelectedOption = rubricChoiceMap[rubricSource] || "";
+
+  // Section 5 — Evidence
+  const evidenceItems = getArray("evidence", "evidenceItems");
+  const evidenceOptions = [
+    "Source code (file or repository)",
+    "Screenshots",
+    "Markdown or plain-text files (student answers)",
+    "PDF files",
+    "Word documents",
+    "Repository notes / commit history",
+    "Student essays or written answers",
+    "Lecturer observations (see Section 7)",
+    "Sample feedback (see Section 13)"
+  ];
+
+  // Section 6 — Insufficient evidence
   const absencePolicy = d("insufficientEvidence", "absencePolicy");
   const referencingReq = d("insufficientEvidence", "referencingRequired");
+  const absenceOptions = [
+    "Award zero and note 'no evidence provided'",
+    "Award zero and flag for lecturer review",
+    "Pause and request additional materials"
+  ];
 
-  // Section 7
+  // Section 7 — Observations
   const observations = d("lecturerObservations", "observations") || "None recorded.";
 
-  // Section 8
+  // Section 8 — Philosophy
   const philosophyOverride = d("philosophy", "philosophyOverride");
-  const philosophyBlock = philosophyOverride ? philosophyOverride : "Standard ARS.md philosophy applies (evidence-based, no generosity, no marks for mere existence).";
+  const philosophyBlock = philosophyOverride || "Standard ARS.md philosophy applies (evidence-based, no generosity, no marks for mere existence).";
 
-  // Section 9
+  // Section 9 — Special cases
   const specialCases = d("specialCases", "specialCases") || "None specified.";
 
-  // Section 10
-  const tableFormat = d("outputFormat", "marksTableFormat");
+  // Section 10 — Output format
+  const marksTableFormat = d("outputFormat", "marksTableFormat");
   const formatCustom = d("outputFormat", "formatCustom");
   const strengthsSection = getSectionValue("outputFormat", "strengthsSection") ? "Required" : "Not required (standard ARS.md)";
+  const tableFormatOptions = [
+    "Format A — Marks only. Table of criteria and marks, with subtotals and total. No per-criterion comments.",
+    "Format B — Marks and comments. Table of criteria, marks, and a short per-criterion comment.",
+    "Format C — Custom. Describe below."
+  ];
+  const tableFormatMap = {
+    "Format A — Marks only": tableFormatOptions[0],
+    "Format B — Marks and comments": tableFormatOptions[1],
+    "Format C — Custom": tableFormatOptions[2]
+  };
+  const tableFormatSelected = tableFormatMap[marksTableFormat] || "";
 
   // Section 11
   const moderationExtra = d("moderationNotes", "moderationNotesExtra") || "None.";
@@ -89,16 +128,41 @@ function compileARS() {
   // Section 12
   const overrides = d("overrides", "overrides") || "None specified.";
 
-  // Section 13
+  // Section 13 — Feedback style
   const feedbackDetail = d("feedbackStyle", "feedbackDetail");
   const sampleSupplied = getSectionValue("feedbackStyle", "sampleFeedbackSupplied") ? "Yes" : "No";
   const sampleFeedbackText = d("feedbackStyle", "sampleFeedback") || "None supplied.";
+  const feedbackDetailOptions = [
+    "Extended prose — full sentences, multi-paragraph feedback, substantial explanation of every deduction.",
+    "Concise prose — short paragraph or two per submission, focused on the highest-signal deductions.",
+    "Point-form — bullet list of specific comments per criterion or per question, minimal prose."
+  ];
+  const feedbackDetailMap = {
+    "Extended prose": feedbackDetailOptions[0],
+    "Concise prose": feedbackDetailOptions[1],
+    "Point-form": feedbackDetailOptions[2]
+  };
+  const feedbackDetailSelected = feedbackDetailMap[feedbackDetail] || "";
 
   // Section 14
   const batchRules = d("batch", "batchRules") || "Standard batch rules apply.";
 
-  // Section 15
+  // Section 15 — Files checklist
   const filesChecklist = getArray("files", "filesChecklist");
+  // "This ARS.md file (completed)" is always ticked because it IS the file being generated.
+  const filesOptions = [
+    "This ARS.md file (completed)",
+    "CHANGELOG.md (companion file)",
+    "Question paper / brief",
+    "Full marking rubric (per Section 4a option chosen)",
+    "Memorandum (if separate from rubric)",
+    "Sample feedback (Section 13, if available)",
+    "Student submissions",
+    "Lecturer observations (Section 7)",
+    "Any other relevant documents"
+  ];
+  // Build the checkbox state: ARS.md is always ticked, plus whatever the lecturer selected.
+  const filesChecked = ["This ARS.md file (completed)", ...filesChecklist.filter(f => f !== "This ARS.md file (completed)")];
 
   // --- Build Markdown ---
   const md = `# Assessment Review Specification (ARS)
@@ -196,12 +260,7 @@ restricts what it may score.
 The rubric may be supplied in one of four ways. Tick the method used and
 follow the corresponding instruction.
 
-${renderCheckboxOptions([
-  "Option 1 — Compiled directly in this ARS. The lecturer has entered the full rubric below (Section 4b). Proceed to 4b.",
-  "Option 2 — Assessment document uploaded. The full assessment document has been uploaded in the chat. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.",
-  "Option 3 — Markdown conversion uploaded. A Markdown version of the assessment document has been uploaded. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.",
-  "Option 4 — Copy-paste from source document. The lecturer has pasted the rubric text directly into the chat. The AI must reconstruct the rubric structure, present its reconstruction (Section 4c), and only proceed once confirmed."
-], [rubricSource])}
+${renderRadioOptions(rubricSourceOptions, rubricSelectedOption)}
 
 > **Note on Option 4:** This option exists because institutional Word
 > documents are often policy-restricted and may not be readable by AI tools.
@@ -253,7 +312,7 @@ ${renderCheckboxOptions([
 > argumentative.
 > *Zero (0–2):* No discernible argument, unsupported assertions, or off-topic.
 
-${rubricSource === "Option 1 — Compiled directly in ARS.md" && rubricText ? `
+${rubricSource === "Compiled directly in ARS.md" && rubricText ? `
 **Lecturer Provided Rubric:**
 ${rubricText}
 ` : ""}
@@ -279,17 +338,7 @@ when a material is missing.
 
 **The lecturer may supply some or all of:**
 
-${renderCheckboxOptions([
-  "Source code (file or repository)",
-  "Screenshots",
-  "Markdown or plain-text files (student answers)",
-  "PDF files",
-  "Word documents",
-  "Repository notes / commit history",
-  "Student essays or written answers",
-  "Lecturer observations (see Section 7)",
-  "Sample feedback (see Section 13)"
-], evidenceItems)}
+${renderCheckboxOptions(evidenceOptions, evidenceItems)}
 
 **Evidence handling rule:**
 
@@ -321,11 +370,7 @@ criterion.
 When a criterion in Section 3 cannot be evidenced at all, the AI must apply
 the lecturer's chosen policy:
 
-${renderRadioOptions([
-  "Award zero and note 'no evidence provided'",
-  "Award zero and flag for lecturer review",
-  "Pause and request additional materials"
-], absencePolicy)}
+${renderRadioOptions(absenceOptions, absencePolicy)}
 
 ### 6b — Partial or unverifiable evidence
 
@@ -429,13 +474,9 @@ ${specialCases.split('\n').map(l => l.trim() ? `> - ${l}` : '').join('\n')}
 
 Select the format required:
 
-${renderRadioOptions([
-  "Format A — Marks only. Table of criteria and marks, with subtotals and total. No per-criterion comments.",
-  "Format B — Marks and comments. Table of criteria, marks, and a short per-criterion comment.",
-  "Format C — Custom. Describe below."
-], tableFormat)}
+${renderRadioOptions(tableFormatOptions, tableFormatSelected)}
 
-${tableFormat === "Format C — Custom" ? `**Custom Format Description:** ${formatCustom}` : ""}
+${marksTableFormat === "Format C — Custom" && formatCustom ? `**Custom Format Description:** ${formatCustom}` : ""}
 
 **Example — Practical (Format A):**
 
@@ -526,11 +567,7 @@ when writing student feedback.
 
 ### 13a — Feedback detail level
 
-${renderRadioOptions([
-  "Extended prose — full sentences, multi-paragraph feedback, substantial explanation of every deduction.",
-  "Concise prose — short paragraph or two per submission, focused on the highest-signal deductions.",
-  "Point-form — bullet list of specific comments per criterion or per question, minimal prose."
-], feedbackDetail)}
+${renderRadioOptions(feedbackDetailOptions, feedbackDetailSelected)}
 
 ### 13b — Sample feedback
 
@@ -574,17 +611,7 @@ ARS.
 
 **Upload checklist (tick as supplied):**
 
-${renderCheckboxOptions([
-  "This ARS.md file (completed)",
-  "CHANGELOG.md (companion file)",
-  "Question paper / brief",
-  "Full marking rubric (per Section 4a option chosen)",
-  "Memorandum (if separate from rubric)",
-  "Sample feedback (Section 13, if available)",
-  "Student submissions",
-  "Lecturer observations (Section 7)",
-  "Any other relevant documents"
-], filesChecklist)}
+${renderCheckboxOptions(filesOptions, filesChecked)}
 
 > If any item is missing, the lecturer should state so in the chat. The AI
 > will follow Section 6 for anything not supplied.
@@ -643,11 +670,14 @@ Do not begin marking until all four gates are confirmed.
 *Generated on ${new Date().toLocaleDateString()} by ARS.md Compiler*
 `;
 
-  // Build checklist for the output modal
+  // Build the checklist for the output modal (side-panel preview)
   const checklist = [];
   if (filesChecklist.length > 0) {
     filesChecklist.forEach(f => checklist.push(f));
   }
-  
+  if (!checklist.includes("This ARS.md file (completed)")) {
+    checklist.unshift("This ARS.md file (completed)");
+  }
+
   return { markdown: md, checklist };
 }

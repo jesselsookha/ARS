@@ -125,7 +125,7 @@ follow the corresponding instruction.
 - [ ] Option 1 — Compiled directly in this ARS. The lecturer has entered the full rubric below (Section 4b). Proceed to 4b.
 - [ ] Option 2 — Assessment document uploaded. The full assessment document has been uploaded in the chat. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.
 - [ ] Option 3 — Markdown conversion uploaded. A Markdown version of the assessment document has been uploaded. The AI must extract the rubric and confirm its understanding with the lecturer (Section 4c) before proceeding.
-- [ ] Option 4 — Copy-paste from source document. The lecturer has pasted the rubric text directly into the chat. The AI must reconstruct the rubric structure, present its reconstruction (Section 4c), and only proceed once confirmed.
+- [x] Option 4 — Copy-paste from source document. The lecturer has pasted the rubric text directly into the chat. The AI must reconstruct the rubric structure, present its reconstruction (Section 4c), and only proceed once confirmed.
 
 > **Note on Option 4:** This option exists because institutional Word
 > documents are often policy-restricted and may not be readable by AI tools.
@@ -200,14 +200,14 @@ when a material is missing.
 
 **The lecturer may supply some or all of:**
 
-- [ ] Source code (file or repository)
+- [x] Source code (file or repository)
 - [x] Screenshots
 - [ ] Markdown or plain-text files (student answers)
 - [ ] PDF files
 - [ ] Word documents
 - [x] Repository notes / commit history
 - [ ] Student essays or written answers
-- [ ] Lecturer observations (see Section 7)
+- [x] Lecturer observations (see Section 7)
 - [ ] Sample feedback (see Section 13)
 
 **Evidence handling rule:**
@@ -362,7 +362,7 @@ Reduce marks where:
 Select the format required:
 
 - [ ] **Format A — Marks only. Table of criteria and marks, with subtotals and total. No per-criterion comments.**
-- [ ] **Format B — Marks and comments. Table of criteria, marks, and a short per-criterion comment.**
+- [x] **Format B — Marks and comments. Table of criteria, marks, and a short per-criterion comment.**
 - [ ] **Format C — Custom. Describe below.**
 
 
@@ -459,7 +459,7 @@ when writing student feedback.
 
 ### 13a — Feedback detail level
 
-- [ ] **Extended prose — full sentences, multi-paragraph feedback, substantial explanation of every deduction.**
+- [x] **Extended prose — full sentences, multi-paragraph feedback, substantial explanation of every deduction.**
 - [ ] **Concise prose — short paragraph or two per submission, focused on the highest-signal deductions.**
 - [ ] **Point-form — bullet list of specific comments per criterion or per question, minimal prose.**
 
