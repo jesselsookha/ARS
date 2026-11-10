@@ -9,11 +9,135 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="../assets/og-image.svg">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css">
+  
+  <!-- Site CSS loads FIRST so markdown CSS can override inside .markdown-body -->
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/styles.css">
+  
+  <!-- GitHub markdown CSS loads LAST so it wins the cascade inside the viewer -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown-light.min.css">
+  
   <style>
-    .examples-content { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    /* Force the markdown viewer into consistent light mode styling.
+       This overrides any browser dark-mode / forced-colours behaviour. */
+    .md-viewer {
+      background: #ffffff;
+      padding: 2.5rem 3rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--rule);
+      margin-top: 1rem;
+    }
+    
+    .md-viewer .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0;
+      background: #ffffff !important;
+      color: #1e293b !important;
+      font-family: var(--font-body) !important;
+      font-size: 0.9rem !important;
+      line-height: 1.7 !important;
+    }
+    
+    /* Force table styling that matches the site's palette */
+    .md-viewer .markdown-body table {
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: #ffffff !important;
+      border: 1px solid #d0d7de;
+    }
+    
+    .md-viewer .markdown-body table th {
+      background: #d7e8ba !important;
+      color: #2e5077 !important;
+      font-weight: 600;
+      padding: 0.6rem 1rem;
+      border: 1px solid #d0d7de;
+      font-family: var(--font-body);
+    }
+    
+    .md-viewer .markdown-body table td {
+      padding: 0.6rem 1rem;
+      border: 1px solid #d0d7de;
+      background: #ffffff !important;
+      color: #1e293b !important;
+    }
+    
+    .md-viewer .markdown-body table tr:nth-child(even) td {
+      background: #f9faf7 !important;
+    }
+    
+    /* Heading colours inside markdown body */
+    .md-viewer .markdown-body h1,
+    .md-viewer .markdown-body h2 {
+      color: #2e5077 !important;
+      font-family: var(--font-heading);
+      border-bottom-color: #e2e8f0 !important;
+    }
+    
+    .md-viewer .markdown-body h3,
+    .md-viewer .markdown-body h4 {
+      color: #2e5077 !important;
+      font-family: var(--font-body);
+    }
+    
+    /* Code blocks inside markdown body */
+    .md-viewer .markdown-body code {
+      background: #f1f5f9 !important;
+      color: #1e293b !important;
+      font-family: var(--font-mono);
+      padding: 0.15rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    
+    .md-viewer .markdown-body pre {
+      background: #f1f5f9 !important;
+      border-left: 3px solid #4da1a9;
+      border-radius: 4px;
+    }
+    
+    .md-viewer .markdown-body pre code {
+      background: transparent !important;
+    }
+    
+    /* Blockquotes */
+    .md-viewer .markdown-body blockquote {
+      border-left: 4px solid #4da1a9 !important;
+      color: #475569 !important;
+      background: #f9faf7;
+      padding: 0.5rem 1rem;
+    }
+    
+    /* Horizontal rules */
+    .md-viewer .markdown-body hr {
+      background: #e2e8f0 !important;
+      border: none;
+      height: 1px;
+      margin: 2rem 0;
+    }
+    
+    /* List spacing */
+    .md-viewer .markdown-body ul,
+    .md-viewer .markdown-body ol {
+      padding-left: 2rem;
+      margin: 1rem 0;
+    }
+    
+    .md-viewer .markdown-body li {
+      margin-bottom: 0.4rem;
+    }
+    
+    /* Links inside markdown body */
+    .md-viewer .markdown-body a {
+      color: #4da1a9 !important;
+      text-decoration: underline;
+    }
+    
+    /* Page layout (unchanged) */
+    .examples-content { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
     .examples-title { font-family: var(--font-heading); font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
     .examples-intro { color: var(--ink-soft); margin-bottom: 2rem; }
     .example-card {
@@ -24,8 +148,6 @@
     .example-card:hover { border-color: var(--interactive); transform: translateY(-2px); }
     .example-card h3 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
     .example-card p { color: var(--ink-soft); font-size: 0.9rem; }
-    .md-viewer { background: white; padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--rule); }
-    .md-viewer .markdown-body { background: white; }
   </style>
 </head>
 <body>
@@ -48,7 +170,7 @@
       <h1 class="examples-title">Sample ARS Documents</h1>
       <p class="examples-intro">Two fictional but complete ARS.md files. Use these as reference points for what a well-constructed Assessment Review Specification looks like.</p>
       
-      <a href="#wed5020" class="example-card" data-file="wed5020-practical.md">
+      <a href="#wede5020" class="example-card" data-file="wede5020-practical.md">
         <h3>WEDE5020 — Web Development PoE (Practical)</h3>
         <p>A practical assessment covering HTML, CSS, and responsive design. Demonstrates how to scope the AI to specific rubric sections.</p>
       </a>
